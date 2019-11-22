@@ -73,7 +73,38 @@ $('.results').eq(i).css("float","left");
 $('.results').eq(i).css("padding","30px");
 }
 
-
-
                }
              }
+
+
+
+             function etsiInfo(){
+              var url = "http://www.finnkino.fi/xml/Schedule";
+              var xmlhttp = new XMLHttpRequest();
+              xmlhttp.open("GET", url, true);
+              xmlhttp.send();
+      
+              xmlhttp.onreadystatechange = function() {
+                  if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+      
+                      var jsonObj  = xmlhttp.responseXML;
+                      var x = jsonObj.getElementsByTagName("Show");
+      
+      
+                      var lista = [];
+                      for(var i=0; i<x.length; i++){
+                        var aika = jsonObj.getElementsByTagName("dttmShowStart")[i].childNodes[0].nodeValue;
+                      //tästä vois tehdö kutsuttavan funktionin jokaselle erikseen??
+                      //laita listaan vain tennispalatsissa näkyvät näytökset
+      
+                            //lisätään nimen lisäksi posterin kuva listaan
+                          lista[i]= aika+"<br>";
+      
+               }
+      
+               console.log(lista);
+               document.write(lista);
+            }
+          }
+        }
+      
