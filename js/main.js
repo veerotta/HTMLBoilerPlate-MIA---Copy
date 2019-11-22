@@ -78,7 +78,7 @@ $('.results').eq(i).css("padding","30px");
 
 
 
-             function etsiInfo(){
+             function aika(){
               var url = "http://www.finnkino.fi/xml/Schedule";
               var xmlhttp = new XMLHttpRequest();
               xmlhttp.open("GET", url, true);
@@ -89,16 +89,26 @@ $('.results').eq(i).css("padding","30px");
       
                       var jsonObj  = xmlhttp.responseXML;
                       var x = jsonObj.getElementsByTagName("Show");
+                      
+                      var teatteri = jsonObj.getElementsByTagName("Theatre");
       
       
                       var lista = [];
                       for(var i=0; i<x.length; i++){
                         var aika = jsonObj.getElementsByTagName("dttmShowStart")[i].childNodes[0].nodeValue;
+                        var teatterinimi = teatteri[i].innerHTML;
                       //tästä vois tehdö kutsuttavan funktionin jokaselle erikseen??
                       //laita listaan vain tennispalatsissa näkyvät näytökset
+
+                      var n = teatterinimi.localeCompare("Kinopalatsi, Helsinki");
+                      if(n==0){
+                      lista[i]=aika+"<br>";
+    
+                  }
+    
       
                             //lisätään nimen lisäksi posterin kuva listaan
-                          lista[i]= aika+"<br>";
+                          
       
                }
       
