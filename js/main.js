@@ -88,13 +88,13 @@ $('.results').eq(i).css("padding","30px");
               if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
   
                   var jsonObj  = xmlhttp.responseXML;
-                  var x = jsonObj.getElementsByTagName("Show");
+                  var show = jsonObj.getElementsByTagName("Show");
                   
                   var teatteri = jsonObj.getElementsByTagName("Theatre");
   
   
                   var lista = [];
-                  for(var i=0; i<x.length; i++){
+                  for(var i=0; i<show.length; i++){
                     var aika = jsonObj.getElementsByTagName("dttmShowStart")[i].childNodes[0].nodeValue;
                     var teatterinimi = teatteri[i].innerHTML;
                   //tästä vois tehdö kutsuttavan funktionin jokaselle erikseen??
