@@ -1,10 +1,10 @@
 var tennisnäytökset = [];
 var kinopalatsi = [];
-var itis = [];
-var maxim = [];
-var flamingo = [];
-var sello = [];
-var omena = [];
+var itisnäytökset = [];
+var maximnäytökset = [];
+var flamingonäytökset = [];
+var sellonäytökset = [];
+var omenanäytökset = [];
 
 function etsitennis(){
   //true oikealle functionille ja false muille napeille, etsitennis on linkki1, kino linkki 2 jne. Voi nimetä html paremmin kunhan muuttaa täölläkin
@@ -67,6 +67,11 @@ function etsitennis(){
        function etsikino(){
         $('.linkit2').prop('disabled', true);
         $('.linkit1').prop('disabled', false);
+        $('.linkit3').prop('disabled', false);
+        $('.linkit4').prop('disabled', false);
+        $('.linkit5').prop('disabled', false);
+        $('.linkit6').prop('disabled', false);
+        $('.linkit7').prop('disabled', false)
         var url = "http://www.finnkino.fi/xml/Schedule/";
         var xmlhttp = new XMLHttpRequest();
         xmlhttp.open("GET", url, true);
@@ -108,9 +113,13 @@ function etsitennis(){
 
 
              function etsiItis(){
-              $('.linkit3').prop('disabled', true);
-              $('.linkit1').prop('disabled', false);
               $('.linkit2').prop('disabled', false);
+              $('.linkit1').prop('disabled', false);
+              $('.linkit3').prop('disabled', true);
+              $('.linkit4').prop('disabled', false);
+              $('.linkit5').prop('disabled', false);
+              $('.linkit6').prop('disabled', false);
+              $('.linkit7').prop('disabled', false)
               var url = "http://www.finnkino.fi/xml/Schedule/";
               var xmlhttp = new XMLHttpRequest();
               xmlhttp.open("GET", url, true);
@@ -140,14 +149,234 @@ function etsitennis(){
                       var vertaaitis = teatterinimi.localeCompare("Itis, Helsinki");
                
                       if(vertaaitis==0){
-                        itis[i]="<img src='" + tiedot[i].getElementsByTagName("EventMediumImagePortrait")[0].childNodes[0].nodeValue + "'/>"+elokuvanimi;
+                        itisnäytökset[i]="<img src='" + tiedot[i].getElementsByTagName("EventMediumImagePortrait")[0].childNodes[0].nodeValue + "'/>"+elokuvanimi;
                       }
                }
-               filteroi(itis);
+               filteroi(itisnäytökset);
              
                      }
                     }
                    }
+
+                   function etsiMaxim(){
+                    //true oikealle functionille ja false muille napeille, etsitennis on linkki1, kino linkki 2 jne. Voi nimetä html paremmin kunhan muuttaa täölläkin
+                    $('.linkit2').prop('disabled', false);
+                    $('.linkit1').prop('disabled', false);
+                    $('.linkit3').prop('disabled', false);
+                    $('.linkit4').prop('disabled', true);
+                    $('.linkit5').prop('disabled', false);
+                    $('.linkit6').prop('disabled', false);
+                    $('.linkit7').prop('disabled', false);
+                  
+                    var url = "http://www.finnkino.fi/xml/Schedule/";
+                    var xmlhttp = new XMLHttpRequest();
+                    xmlhttp.open("GET", url, true);
+                    xmlhttp.send();
+                  
+                    xmlhttp.onreadystatechange = function() {
+                        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                  
+                            var jsonObj  = xmlhttp.responseXML;
+                            var tiedot = jsonObj.getElementsByTagName("Show");
+                            var nimet = jsonObj.getElementsByTagName("Title");
+                            var teatteri = jsonObj.getElementsByTagName("Theatre");
+                            var ajat=[];
+                            var testi = jsonObj.getElementsByTagName("dttmShowStart");
+                            document.getElementById("elokuvat").innerHTML ="";
+                  
+                            //Haetaan kaikki elokuvien nimet ja lisätään ne listaan
+                            for(var i=0; i<tiedot.length; i++){
+                            var elokuvanimi="<p>"+nimet[i].textContent+"</p>";
+                            var teatterinimi=teatteri[i].innerHTML;
+                            var aika = jsonObj.getElementsByTagName("dttmShowStart")[i].childNodes[0].nodeValue;
+                          
+                  
+                            //tästä vois tehdö kutsuttavan funktionin jokaselle erikseen??
+                            //laita listaan vain tennispalatsissa näkyvät näytökset
+                  
+                            //muuta vertaateatterin nimeksi ja "" haku mikä teatteri
+                            var vertaamaxim = teatterinimi.localeCompare("Maxim, Helsinki");
+                  
+                                //muista täällä muuttaa myös kaikki
+                                if(vertaamaxim==0){
+                                  ajat[i]=aika; //kaikki tennispalatsin ajat
+                                  //lisätään nimen lisäksi posterin kuva listaan
+                                maximnäytökset[i]="<img src='" + tiedot[i].getElementsByTagName("EventMediumImagePortrait")[0].childNodes[0].nodeValue + "'/>"+elokuvanimi;
+                            }
+                  
+                     }
+                  
+                     //ja tämä
+                     filteroi(maximnäytökset);
+                   
+                           }
+                          }
+                         }
+
+                         function etsiFlamingo(){
+                          //true oikealle functionille ja false muille napeille, etsitennis on linkki1, kino linkki 2 jne. Voi nimetä html paremmin kunhan muuttaa täölläkin
+                          $('.linkit2').prop('disabled', false);
+                          $('.linkit1').prop('disabled', false);
+                          $('.linkit3').prop('disabled', false);
+                          $('.linkit4').prop('disabled', false);
+                          $('.linkit5').prop('disabled', true);
+                          $('.linkit6').prop('disabled', false);
+                          $('.linkit7').prop('disabled', false);
+                        
+                          var url = "http://www.finnkino.fi/xml/Schedule/";
+                          var xmlhttp = new XMLHttpRequest();
+                          xmlhttp.open("GET", url, true);
+                          xmlhttp.send();
+                        
+                          xmlhttp.onreadystatechange = function() {
+                              if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                        
+                                  var jsonObj  = xmlhttp.responseXML;
+                                  var tiedot = jsonObj.getElementsByTagName("Show");
+                                  var nimet = jsonObj.getElementsByTagName("Title");
+                                  var teatteri = jsonObj.getElementsByTagName("Theatre");
+                                  var ajat=[];
+                                  var testi = jsonObj.getElementsByTagName("dttmShowStart");
+                                  document.getElementById("elokuvat").innerHTML ="";
+                        
+                                  //Haetaan kaikki elokuvien nimet ja lisätään ne listaan
+                                  for(var i=0; i<tiedot.length; i++){
+                                  var elokuvanimi="<p>"+nimet[i].textContent+"</p>";
+                                  var teatterinimi=teatteri[i].innerHTML;
+                                  var aika = jsonObj.getElementsByTagName("dttmShowStart")[i].childNodes[0].nodeValue;
+                                
+                        
+                                  //tästä vois tehdö kutsuttavan funktionin jokaselle erikseen??
+                                  //laita listaan vain tennispalatsissa näkyvät näytökset
+                        
+                                  //muuta vertaateatterin nimeksi ja "" haku mikä teatteri
+                                  var vertaaFlamingo = teatterinimi.localeCompare("Flamingo, Vantaa");
+                        
+                                      //muista täällä muuttaa myös kaikki
+                                      if(vertaaFlamingo==0){
+                                        ajat[i]=aika; //kaikki tennispalatsin ajat
+                                        //lisätään nimen lisäksi posterin kuva listaan
+                                      flamingonäytökset[i]="<img src='" + tiedot[i].getElementsByTagName("EventMediumImagePortrait")[0].childNodes[0].nodeValue + "'/>"+elokuvanimi;
+                                  }
+                        
+                           }
+                        
+                           //ja tämä
+                           filteroi(flamingonäytökset);
+                         
+                                 }
+                                }
+                               }
+
+
+                               function etsiSello(){
+                                //true oikealle functionille ja false muille napeille, etsitennis on linkki1, kino linkki 2 jne. Voi nimetä html paremmin kunhan muuttaa täölläkin
+                                $('.linkit2').prop('disabled', false);
+                                $('.linkit1').prop('disabled', false);
+                                $('.linkit3').prop('disabled', false);
+                                $('.linkit4').prop('disabled', false);
+                                $('.linkit5').prop('disabled', false);
+                                $('.linkit6').prop('disabled', true);
+                                $('.linkit7').prop('disabled', false);
+                              
+                                var url = "http://www.finnkino.fi/xml/Schedule/";
+                                var xmlhttp = new XMLHttpRequest();
+                                xmlhttp.open("GET", url, true);
+                                xmlhttp.send();
+                              
+                                xmlhttp.onreadystatechange = function() {
+                                    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                              
+                                        var jsonObj  = xmlhttp.responseXML;
+                                        var tiedot = jsonObj.getElementsByTagName("Show");
+                                        var nimet = jsonObj.getElementsByTagName("Title");
+                                        var teatteri = jsonObj.getElementsByTagName("Theatre");
+                                        var ajat=[];
+                                        var testi = jsonObj.getElementsByTagName("dttmShowStart");
+                                        document.getElementById("elokuvat").innerHTML ="";
+                              
+                                        //Haetaan kaikki elokuvien nimet ja lisätään ne listaan
+                                        for(var i=0; i<tiedot.length; i++){
+                                        var elokuvanimi="<p>"+nimet[i].textContent+"</p>";
+                                        var teatterinimi=teatteri[i].innerHTML;
+                                        var aika = jsonObj.getElementsByTagName("dttmShowStart")[i].childNodes[0].nodeValue;
+                                      
+                              
+                                        //tästä vois tehdö kutsuttavan funktionin jokaselle erikseen??
+                                        //laita listaan vain tennispalatsissa näkyvät näytökset
+                              
+                                        //muuta vertaateatterin nimeksi ja "" haku mikä teatteri
+                                        var vertaasello = teatterinimi.localeCompare("Maxim, Helsinki");
+                              
+                                            //muista täällä muuttaa myös kaikki
+                                            if(vertaasello==0){
+                                              ajat[i]=aika; //kaikki tennispalatsin ajat
+                                              //lisätään nimen lisäksi posterin kuva listaan
+                                            sellonäytökset[i]="<img src='" + tiedot[i].getElementsByTagName("EventMediumImagePortrait")[0].childNodes[0].nodeValue + "'/>"+elokuvanimi;
+                                        }
+                              
+                                 }
+                              
+                                 //ja tämä
+                                 filteroi(sellonäytökset);
+                               
+                                       }
+                                      }
+                                     }
+                                     function etsiOmena(){
+                                      //true oikealle functionille ja false muille napeille, etsitennis on linkki1, kino linkki 2 jne. Voi nimetä html paremmin kunhan muuttaa täölläkin
+                                      $('.linkit2').prop('disabled', false);
+                                      $('.linkit1').prop('disabled', false);
+                                      $('.linkit3').prop('disabled', false);
+                                      $('.linkit4').prop('disabled', false);
+                                      $('.linkit5').prop('disabled', false);
+                                      $('.linkit6').prop('disabled', false);
+                                      $('.linkit7').prop('disabled', true);
+                                    
+                                      var url = "http://www.finnkino.fi/xml/Schedule/";
+                                      var xmlhttp = new XMLHttpRequest();
+                                      xmlhttp.open("GET", url, true);
+                                      xmlhttp.send();
+                                    
+                                      xmlhttp.onreadystatechange = function() {
+                                          if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                                    
+                                              var jsonObj  = xmlhttp.responseXML;
+                                              var tiedot = jsonObj.getElementsByTagName("Show");
+                                              var nimet = jsonObj.getElementsByTagName("Title");
+                                              var teatteri = jsonObj.getElementsByTagName("Theatre");
+                                              var ajat=[];
+                                              var testi = jsonObj.getElementsByTagName("dttmShowStart");
+                                              document.getElementById("elokuvat").innerHTML ="";
+                                    
+                                              //Haetaan kaikki elokuvien nimet ja lisätään ne listaan
+                                              for(var i=0; i<tiedot.length; i++){
+                                              var elokuvanimi="<p>"+nimet[i].textContent+"</p>";
+                                              var teatterinimi=teatteri[i].innerHTML;
+                                              var aika = jsonObj.getElementsByTagName("dttmShowStart")[i].childNodes[0].nodeValue;
+                                            
+                                    
+                                              //tästä vois tehdö kutsuttavan funktionin jokaselle erikseen??
+                                              //laita listaan vain tennispalatsissa näkyvät näytökset
+                                    
+                                              //muuta vertaateatterin nimeksi ja "" haku mikä teatteri
+                                              var vertaaomena = teatterinimi.localeCompare("Maxim, Helsinki");
+                                    
+                                                  //muista täällä muuttaa myös kaikki
+                                                  if(vertaaomena==0){
+                                                    ajat[i]=aika; //kaikki tennispalatsin ajat
+                                                    //lisätään nimen lisäksi posterin kuva listaan
+                                                  omenanäytökset[i]="<img src='" + tiedot[i].getElementsByTagName("EventMediumImagePortrait")[0].childNodes[0].nodeValue + "'/>"+elokuvanimi;
+                                              }
+                                    
+                                       }
+                                    
+                                       //ja tämä
+                                       filteroi(omenanäytökset);
+                                     
+                                             }
+                                            }
+                                           }
       
 
        function filteroi(teatteri){
