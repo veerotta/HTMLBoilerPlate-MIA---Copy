@@ -306,7 +306,7 @@ function etsitennis(){
                                         //laita listaan vain tennispalatsissa näkyvät näytökset
                               
                                         //muuta vertaateatterin nimeksi ja "" haku mikä teatteri
-                                        var vertaasello = teatterinimi.localeCompare("Maxim, Helsinki");
+                                        var vertaasello = teatterinimi.localeCompare("Sello, Espoo");
                               
                                             //muista täällä muuttaa myös kaikki
                                             if(vertaasello==0){
@@ -360,7 +360,7 @@ function etsitennis(){
                                               //laita listaan vain tennispalatsissa näkyvät näytökset
                                     
                                               //muuta vertaateatterin nimeksi ja "" haku mikä teatteri
-                                              var vertaaomena = teatterinimi.localeCompare("Maxim, Helsinki");
+                                              var vertaaomena = teatterinimi.localeCompare("Omena, Espoo");
                                     
                                                   //muista täällä muuttaa myös kaikki
                                                   if(vertaaomena==0){
