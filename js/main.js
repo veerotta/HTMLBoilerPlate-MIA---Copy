@@ -3,118 +3,81 @@
 function avaa(){
 
 
-      var url = "http://www.finnkino.fi/xml/Schedule/";
-      var xmlhttp = new XMLHttpRequest();
-      xmlhttp.open("GET", url, true);
-  	  xmlhttp.send();
+  var url = "http://www.finnkino.fi/xml/Schedule/";
+  var xmlhttp = new XMLHttpRequest();
+  xmlhttp.open("GET", url, true);
+  xmlhttp.send();
 
-  	  xmlhttp.onreadystatechange = function() {
-          if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+  xmlhttp.onreadystatechange = function() {
+      if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
 
-              var jsonObj  = xmlhttp.responseXML;
-              var t = jsonObj.getElementsByTagName("Show");
-              var shows = jsonObj.getElementsByTagName("Title");
-              var where = jsonObj.getElementsByTagName("Theatre");
-              //var info2 = "<img src='" + x[2].getElementsByTagName("EventMediumImagePortrait")[0].childNodes[0].nodeValue + "'/>";
+          var jsonObj  = xmlhttp.responseXML;
+          var tiedot = jsonObj.getElementsByTagName("Show");
+          var nimet = jsonObj.getElementsByTagName("Title");
+          var teatteri = jsonObj.getElementsByTagName("Theatre");
+          var ajat=[];
+          var testi = jsonObj.getElementsByTagName("dttmShowStart");
+          document.getElementById("elokuvat").innerHTML ="";
 
+          var tennisnäytökset = [];
+          var kinopalatsi = [];
+          var itis = [];
+          var maxim = [];
+          var flamingo = [];
+          var sello = [];
+          var omena = [];
 
-              document.getElementById("elokuvat").innerHTML ="";
-              var lista = [];
-
-
-              for(var i=0; i<t.length; i++){
-              var y="<p>"+shows[i].textContent+"</p>";
-              var x=where[i].innerHTML;
-
-
-              //tästä vois tehdö kutsuttavan funktionin jokaselle erikseen??
-              //laita listaan vain tennispalatsissa näkyvät näytökset
-              var n = x.localeCompare("Tennispalatsi, Helsinki");
-                  if(n==0){
-                  lista[i]="<img src='" + t[i].getElementsByTagName("EventMediumImagePortrait")[0].childNodes[0].nodeValue + "'/>"+y;
-
-              }
-
-       } 
-              
-                   var n = x.localeCompare("Kinopalatsi, Helsinki");
-                  if(n==0){
-                  lista[i]="<img src='" + t[i].getElementsByTagName("EventMediumImagePortrait")[1].childNodes[1].nodeValue + "'/>"+y;
-
-              }
-
-       } 
+          //Haetaan kaikki elokuvien nimet ja lisätään ne listaan
+          for(var i=0; i<tiedot.length; i++){
+          var elokuvanimi="<p>"+nimet[i].textContent+"</p>";
+          var teatterinimi=teatteri[i].innerHTML;
+          var aika = jsonObj.getElementsByTagName("dttmShowStart")[i].childNodes[0].nodeValue;
         
 
-       //järjestää aakkosjärjestykseen
-       //lista.sort();
+          //tästä vois tehdö kutsuttavan funktionin jokaselle erikseen??
+          //laita listaan vain tennispalatsissa näkyvät näytökset
+          var vertaatennis = teatterinimi.localeCompare("Tennispalatsi, Helsinki");
+          var vertaakino = teatterinimi.localeCompare("Kinopalatsi, Helsinki");
 
-
-
-
-
-         var filteredArr = lista.filter(function(item, index) {//poistaa dublicated nimistä
-          if (lista.indexOf(item) == index)
-          return item;
-          });
-
-
-//tee jokaiselle posteri+otsikolle oma divi
-          var arrayLength = filteredArr.length;
-          var temp;
-for (i = 0; i < arrayLength; i++) {
-  temp = document.createElement('div');
-  temp.className = 'results';
-  temp.innerHTML = filteredArr[i];
-  document.getElementsByTagName('h3')[0].appendChild(temp);
-}
-for (i = 0; i < arrayLength+2; i++) {
-$('.results').eq(i).css("float","left");
-$('.results').eq(i).css("padding","30px");
-}
-
-               }
-             }
-
-
-
-             function aika(){
-              var url = "http://www.finnkino.fi/xml/Schedule";
-              var xmlhttp = new XMLHttpRequest();
-              xmlhttp.open("GET", url, true);
-              xmlhttp.send();
-      
-              xmlhttp.onreadystatechange = function() {
-                  if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-      
-                      var jsonObj  = xmlhttp.responseXML;
-                      var show = jsonObj.getElementsByTagName("Show");
-                      
-                      var teatteri = jsonObj.getElementsByTagName("Theatre");
-      
-      
-                      var lista = [];
-                      for(var i=0; i<show.length; i++){
-                        var aika = jsonObj.getElementsByTagName("dttmShowStart")[i].childNodes[0].nodeValue;
-                        var teatterinimi = teatteri[i].innerHTML;
-                      //tästä vois tehdö kutsuttavan funktionin jokaselle erikseen??
-                      //laita listaan vain tennispalatsissa näkyvät näytökset
-
-                      var n = teatterinimi.localeCompare("Kinopalatsi, Helsinki");
-                      if(n==0){
-                      lista[i]=aika+"<br>";
-    
-                  }
-    
-      
-                            //lisätään nimen lisäksi posterin kuva listaan
-                          
-      
-               }
-      
-               console.log(lista);
-               document.write(lista);
-            }
+              if(vertaatennis==0){
+                ajat[i]=aika; //kaikki tennispalatsin ajat
+                //lisätään nimen lisäksi posterin kuva listaan
+              tennisnäytökset[i]="<img src='" + tiedot[i].getElementsByTagName("EventMediumImagePortrait")[0].childNodes[0].nodeValue + "'/>"+elokuvanimi;
           }
+          filteroi(tennisnäytökset[]);
+          if(vertaakino==0){
+            kinopalatsi[i]="<img src='" + tiedot[i].getElementsByTagName("EventMediumImagePortrait")[0].childNodes[0].nodeValue + "'/>"+elokuvanimi;
+          }
+          filteroi(kinopalatsi);
+        
+   }
+ 
+         }
         }
-      
+       }
+
+       function filteroi(teatteri){
+        //poistaa dublicated nimistä
+       var filteredTennis = tennisnäytökset.filter(function(item, index) {
+        if (tennisnäytökset.indexOf(item) == index)
+        return item;
+        });
+  
+        //tee jokaiselle posteri+otsikolle oma divi
+        var arrayLength = filteredTennis.length;
+        var temp;
+          for (i = 0; i < arrayLength; i++) {
+            temp = document.createElement('div');
+            temp.className = 'results';
+            temp.innerHTML = filteredTennis[i];
+  
+            //lisää divit h3 tagin sisään sivuston html koodiin
+            document.getElementsByTagName('h3')[0].appendChild(temp);
+            }
+  
+          //muokkaa posterien+nimen paikkaa sivustolla divin avulla
+          for (i = 0; i < arrayLength+2; i++) {
+            $('.results').eq(i).css("float","left");
+            $('.results').eq(i).css("padding","30px");
+              }
+             }
