@@ -17,7 +17,7 @@
 }
 
 body {
-    background-color: #EFE6E1;
+    background-color: black;
     text-align: center;
 }
 
@@ -26,16 +26,27 @@ h3{
 }
 
 html {
-    color: black;
+    color: white;
     font-family: monospace;
     font-size: 20px;
     line-height: 1.4;
 
 }
 
-h1 {
-    text-shadow: 2px 2px 8px #A38181;
+header {
+  padding: 60px;
+}
 
+h1 {
+    color: #fff;
+    font-family: monospace;
+    font-size: 65px;
+    font-weight: normal;
+    line-height: 60px;
+    margin: 10px 0 20px;
+    text-shadow: 2px 2px 0 #000;
+    margin: 10px 0 24px;
+    text-align: center;
 }
 
 
@@ -55,12 +66,12 @@ h1 {
   }
 }
 .teatterit button:hover {
-     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
-}
+     box-shadow: 0 12px 16px 0 rgba(243, 212, 73, 0.616), 0 17px 50px 0 rgba(243, 212, 73, 0.616);
+      cursor: pointer;
+    }
 
 .linkit {
-    background-color: #CAA5A8;
-    color: ;
+    background-color:#FDCA00;
     border: none;
 
 }
