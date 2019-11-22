@@ -1,0 +1,60 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="apple-touch-icon" href="icon.png">
+  <!-- Place favicon.ico in the root directory -->
+
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/main.css">
+
+  <meta name="theme-color" content="#fafafa">
+</head>
+
+<body>
+
+  <h1>Movie Information App</h1>
+    <p class="p1">Hey! Here you can choose the theater you wanna see the movie in <br> and then you´ll see the movies and showtimes  from that theater!</p>
+    <p>Pick the theater...</p>
+    <div class="teatterit">
+        <button class="linkit" onclick="avaa();this.onclick=null">Tennispalatsi</button>
+        <button class="linkit" onclick="avaa">Kinopalatsi</button>
+        <button class="linkit" onclick="avaa">Itis</button>
+        <button class="linkit" onclick="avaa">Maxim</button>
+        <button class="linkit" onclick="avaa">Flamingo</button>
+        <button class="linkit" onclick="avaa">Sello</button>
+        <button class="linkit" onclick="avaa">Omena</button>
+    </div>
+
+  <!--<img id=id1></img>-->
+
+
+    <!-- sit ku teatteri on valittu, näkyviin pitäis tulla kuvat ja infoa ongoing leffoista mitä siel teatteris näkyy -->
+
+    <div id="elokuvat"></div>
+<h3></h3>
+
+
+    <!-- nää tulee näkyviin kun on teatterin valinnu -->
+
+  <script src="js/vendor/modernizr-3.7.1.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+  <script>window.jQuery || document.write('<script src="js/vendor/jquery-3.4.1.min.js"><\/script>')</script>
+  <script src="js/plugins.js"></script>
+  <script src="js/main.js"></script>
+
+  <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
+  <script>
+    window.ga = function () { ga.q.push(arguments) }; ga.q = []; ga.l = +new Date;
+    ga('create', 'UA-XXXXX-Y', 'auto'); ga('set','transport','beacon'); ga('send', 'pageview')
+  </script>
+  <script src="https://www.google-analytics.com/analytics.js" async></script>
+</body>
+
+</html>
