@@ -2,6 +2,7 @@
 
 function avaa(){
 
+
   var url = "http://www.finnkino.fi/xml/Schedule/";
   var xmlhttp = new XMLHttpRequest();
   xmlhttp.open("GET", url, true);
@@ -18,7 +19,14 @@ function avaa(){
           var testi = jsonObj.getElementsByTagName("dttmShowStart");
           document.getElementById("elokuvat").innerHTML ="";
 
-          var lista = [];
+          var tennisnäytökset = [];
+          var kinopalatsi = [];
+          var itis = [];
+          var maxim = [];
+          var flamingo = [];
+          var sello = [];
+          var omena = [];
+
           //Haetaan kaikki elokuvien nimet ja lisätään ne listaan
           for(var i=0; i<tiedot.length; i++){
           var elokuvanimi="<p>"+nimet[i].textContent+"</p>";
@@ -28,42 +36,48 @@ function avaa(){
 
           //tästä vois tehdö kutsuttavan funktionin jokaselle erikseen??
           //laita listaan vain tennispalatsissa näkyvät näytökset
-          var n = teatterinimi.localeCompare("Tennispalatsi, Helsinki");
-              if(n==0){
+          var vertaatennis = teatterinimi.localeCompare("Tennispalatsi, Helsinki");
+          var vertaakino = teatterinimi.localeCompare("Kinopalatsi, Helsinki");
+
+              if(vertaatennis==0){
                 ajat[i]=aika; //kaikki tennispalatsin ajat
                 //lisätään nimen lisäksi posterin kuva listaan
-              lista[i]="<img src='" + tiedot[i].getElementsByTagName("EventMediumImagePortrait")[0].childNodes[0].nodeValue + "'/>"+elokuvanimi;
-
+              tennisnäytökset[i]="<img src='" + tiedot[i].getElementsByTagName("EventMediumImagePortrait")[0].childNodes[0].nodeValue + "'/>"+elokuvanimi;
           }
-
+          filteroi(tennisnäytökset[]);
+          if(vertaakino==0){
+            kinopalatsi[i]="<img src='" + tiedot[i].getElementsByTagName("EventMediumImagePortrait")[0].childNodes[0].nodeValue + "'/>"+elokuvanimi;
+          }
+          filteroi(kinopalatsi);
         
    }
-   console.log(ajat);
-
-      //poistaa dublicated nimistä
-     var filteredArr = lista.filter(function(item, index) {
-      if (lista.indexOf(item) == index)
-      return item;
-      });
-
-      //tee jokaiselle posteri+otsikolle oma divi
-      var arrayLength = filteredArr.length;
-      var temp;
-        for (i = 0; i < arrayLength; i++) {
-          temp = document.createElement('div');
-          temp.className = 'results';
-          temp.innerHTML = filteredArr[i];
-
-          //lisää divit h3 tagin sisään sivuston html koodiin
-          document.getElementsByTagName('h3')[0].appendChild(temp);
-          }
-
-        //muokkaa posterien+nimen paikkaa sivustolla divin avulla
-        for (i = 0; i < arrayLength+2; i++) {
-          $('.results').eq(i).css("float","left");
-          $('.results').eq(i).css("padding","30px");
-            }
-           }
+ 
          }
+        }
        }
 
+       function filteroi(teatteri){
+        //poistaa dublicated nimistä
+       var filteredTennis = tennisnäytökset.filter(function(item, index) {
+        if (tennisnäytökset.indexOf(item) == index)
+        return item;
+        });
+  
+        //tee jokaiselle posteri+otsikolle oma divi
+        var arrayLength = filteredTennis.length;
+        var temp;
+          for (i = 0; i < arrayLength; i++) {
+            temp = document.createElement('div');
+            temp.className = 'results';
+            temp.innerHTML = filteredTennis[i];
+  
+            //lisää divit h3 tagin sisään sivuston html koodiin
+            document.getElementsByTagName('h3')[0].appendChild(temp);
+            }
+  
+          //muokkaa posterien+nimen paikkaa sivustolla divin avulla
+          for (i = 0; i < arrayLength+2; i++) {
+            $('.results').eq(i).css("float","left");
+            $('.results').eq(i).css("padding","30px");
+              }
+             }
