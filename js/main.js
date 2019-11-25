@@ -35,7 +35,7 @@ function etsitennis(){
 
           //Haetaan kaikki elokuvien nimet ja lisätään ne listaan
           for(var i=0; i<tiedot.length; i++){
-          var elokuvanimi="<p>"+nimet[i].textContent+"</p>";
+          var elokuvanimi="<p class='1'>"+nimet[i].textContent+"</p>";
           var teatterinimi=teatteri[i].innerHTML;
           var aika = jsonObj.getElementsByTagName("dttmShowStart")[i].childNodes[0].nodeValue;
           
@@ -76,7 +76,7 @@ function etsitennis(){
                                   var shortStartDate = month + ":" + day;
                                   
 
-              tennisnäytökset[i]="<img src='" + tiedot[i].getElementsByTagName("EventMediumImagePortrait")[0].childNodes[0].nodeValue + "'/>"+elokuvanimi+hetki;
+              tennisnäytökset[i]="<img src='" + tiedot[i].getElementsByTagName("EventMediumImagePortrait")[0].childNodes[0].nodeValue + "'/>"+elokuvanimi;
           }
 
    }
@@ -405,7 +405,7 @@ function etsitennis(){
                                             }
                                            }
       
-
+var temp;
        function filteroi(teatteri){
         
         $('h3').text('');
@@ -417,21 +417,65 @@ function etsitennis(){
   
         //tee jokaiselle posteri+otsikolle oma divi
         var arrayLength = filteredTennis.length;
-        var temp;
+        //var temp;
           for (i = 0; i < arrayLength; i++) {
             temp = document.createElement('div');
-            temp.className = 'results';
-            temp.innerHTML = filteredTennis[i];
-  
+            temp.setAttribute("id", "Joker");
+           
+            temp.innerHTML = "<button onclick=\"reply_click(this.id);\"</button>"+filteredTennis[i]+"</button>";
+         
             //lisää divit h3 tagin sisään sivuston html koodiin
             document.getElementsByTagName('h3')[0].appendChild(temp);
             }
 
+}
+
+function reply_click(taa_id) {
+  var it = taa_id;
+
+  var url = "http://www.finnkino.fi/xml/Schedule/";
+  var xmlhttp = new XMLHttpRequest();
+  xmlhttp.open("GET", url, true);
+  xmlhttp.send();
+
+  xmlhttp.onreadystatechange = function() {
+      if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+
+          var jsonObj  = xmlhttp.responseXML;
+          var tiedot = jsonObj.getElementsByTagName("Show");
+          var nimet = jsonObj.getElementsByTagName("Title");
+      
+
+          
+  for(var i=0; i<tiedot.length; i++){
+    nimet[i];
+
+    if (nimet[i].textContent==temp.id){
+      function addZero(i) {
+        if (i < 10) {
+          i = "0" + i;
+        }
+        return i;
+      }
+      var k = tiedot[i].getElementsByTagName("dttmShowStart")[0].childNodes[0].nodeValue
+      var d = new Date(k);
+      var n = d.getHours();
+      var min = addZero(d.getMinutes());
+      var aika=n+":"+min;
+      console.log(n+":"+min);
+    
+      document.getElementById('Joker').innerHTML+="<br>" +aika;
+    }
+ 
+  }
+}
+  }
+}
   
           //muokkaa posterien+nimen paikkaa sivustolla divin avulla
           for (i = 0; i < arrayLength+2; i++) {
             $('.results').eq(i).css("float","left");
             $('.results').eq(i).css("padding","30px");
               }
-             }
+             
 
