@@ -8,13 +8,13 @@ var omenanäytökset = [];
 
 function etsitennis(){
   //true oikealle functionille ja false muille napeille, etsitennis on linkki1, kino linkki 2 jne. Voi nimetä html paremmin kunhan muuttaa täölläkin
-  $('.linkit2').prop('disabled', false);
-  $('.linkit1').prop('disabled', true);
-  $('.linkit3').prop('disabled', false);
-  $('.linkit4').prop('disabled', false);
-  $('.linkit5').prop('disabled', false);
-  $('.linkit6').prop('disabled', false);
-  $('.linkit7').prop('disabled', false);
+  $('.kinonappi').prop('disabled', false);
+  $('.tennisnappi').prop('disabled', true);
+  $('.maximnappi').prop('disabled', false);
+  $('.omenanappi').prop('disabled', false);
+  $('.sellonappi').prop('disabled', false);
+  $('.flamingonappi').prop('disabled', false);
+  $('.itisnappi').prop('disabled', false);
 
   var url = "http://www.finnkino.fi/xml/Schedule/";
   var xmlhttp = new XMLHttpRequest();
@@ -65,13 +65,13 @@ function etsitennis(){
 
 
        function etsikino(){
-        $('.linkit2').prop('disabled', true);
-        $('.linkit1').prop('disabled', false);
-        $('.linkit3').prop('disabled', false);
-        $('.linkit4').prop('disabled', false);
-        $('.linkit5').prop('disabled', false);
-        $('.linkit6').prop('disabled', false);
-        $('.linkit7').prop('disabled', false)
+        $('.kinonappi').prop('disabled', true);
+        $('.tennisnappi').prop('disabled', false);
+        $('.maximnappi').prop('disabled', false);
+        $('.omenanappi').prop('disabled', false);
+        $('.sellonappi').prop('disabled', false);
+        $('.flamingonappi').prop('disabled', false);
+        $('.itisnappi').prop('disabled', false);
         var url = "http://www.finnkino.fi/xml/Schedule/";
         var xmlhttp = new XMLHttpRequest();
         xmlhttp.open("GET", url, true);
@@ -113,13 +113,13 @@ function etsitennis(){
 
 
              function etsiItis(){
-              $('.linkit2').prop('disabled', false);
-              $('.linkit1').prop('disabled', false);
-              $('.linkit3').prop('disabled', true);
-              $('.linkit4').prop('disabled', false);
-              $('.linkit5').prop('disabled', false);
-              $('.linkit6').prop('disabled', false);
-              $('.linkit7').prop('disabled', false)
+              $('.kinonappi').prop('disabled', false);
+              $('.tennisnappi').prop('disabled', false);
+              $('.maximnappi').prop('disabled', false);
+              $('.omenanappi').prop('disabled', false);
+              $('.sellonappi').prop('disabled', false);
+              $('.flamingonappi').prop('disabled', false);
+              $('.itisnappi').prop('disabled', true);
               var url = "http://www.finnkino.fi/xml/Schedule/";
               var xmlhttp = new XMLHttpRequest();
               xmlhttp.open("GET", url, true);
@@ -160,13 +160,13 @@ function etsitennis(){
 
                    function etsiMaxim(){
                     //true oikealle functionille ja false muille napeille, etsitennis on linkki1, kino linkki 2 jne. Voi nimetä html paremmin kunhan muuttaa täölläkin
-                    $('.linkit2').prop('disabled', false);
-                    $('.linkit1').prop('disabled', false);
-                    $('.linkit3').prop('disabled', false);
-                    $('.linkit4').prop('disabled', true);
-                    $('.linkit5').prop('disabled', false);
-                    $('.linkit6').prop('disabled', false);
-                    $('.linkit7').prop('disabled', false);
+                    $('.kinonappi').prop('disabled', false);
+                    $('.tennisnappi').prop('disabled', false);
+                    $('.maximnappi').prop('disabled', true);
+                    $('.omenanappi').prop('disabled', false);
+                    $('.sellonappi').prop('disabled', false);
+                    $('.flamingonappi').prop('disabled', false);
+                    $('.itisnappi').prop('disabled', false);
                   
                     var url = "http://www.finnkino.fi/xml/Schedule/";
                     var xmlhttp = new XMLHttpRequest();
@@ -215,13 +215,13 @@ function etsitennis(){
 
                          function etsiFlamingo(){
                           //true oikealle functionille ja false muille napeille, etsitennis on linkki1, kino linkki 2 jne. Voi nimetä html paremmin kunhan muuttaa täölläkin
-                          $('.linkit2').prop('disabled', false);
-                          $('.linkit1').prop('disabled', false);
-                          $('.linkit3').prop('disabled', false);
-                          $('.linkit4').prop('disabled', false);
-                          $('.linkit5').prop('disabled', true);
-                          $('.linkit6').prop('disabled', false);
-                          $('.linkit7').prop('disabled', false);
+                          $('.kinonappi').prop('disabled', false);
+                          $('.tennisnappi').prop('disabled', false);
+                          $('.maximnappi').prop('disabled', false);
+                          $('.omenanappi').prop('disabled', false);
+                          $('.sellonappi').prop('disabled', false);
+                          $('.flamingonappi').prop('disabled', true);
+                          $('.itisnappi').prop('disabled', false);
                         
                           var url = "http://www.finnkino.fi/xml/Schedule/";
                           var xmlhttp = new XMLHttpRequest();
@@ -271,13 +271,13 @@ function etsitennis(){
 
                                function etsiSello(){
                                 //true oikealle functionille ja false muille napeille, etsitennis on linkki1, kino linkki 2 jne. Voi nimetä html paremmin kunhan muuttaa täölläkin
-                                $('.linkit2').prop('disabled', false);
-                                $('.linkit1').prop('disabled', false);
-                                $('.linkit3').prop('disabled', false);
-                                $('.linkit4').prop('disabled', false);
-                                $('.linkit5').prop('disabled', false);
-                                $('.linkit6').prop('disabled', true);
-                                $('.linkit7').prop('disabled', false);
+                                $('.kinonappi').prop('disabled', false);
+                                $('.tennisnappi').prop('disabled', false);
+                                $('.maximnappi').prop('disabled', false);
+                                $('.omenanappi').prop('disabled', false);
+                                $('.sellonappi').prop('disabled', true);
+                                $('.flamingonappi').prop('disabled', false);
+                                $('.itisnappi').prop('disabled', false);
                               
                                 var url = "http://www.finnkino.fi/xml/Schedule/";
                                 var xmlhttp = new XMLHttpRequest();
@@ -325,13 +325,13 @@ function etsitennis(){
                                      }
                                      function etsiOmena(){
                                       //true oikealle functionille ja false muille napeille, etsitennis on linkki1, kino linkki 2 jne. Voi nimetä html paremmin kunhan muuttaa täölläkin
-                                      $('.linkit2').prop('disabled', false);
-                                      $('.linkit1').prop('disabled', false);
-                                      $('.linkit3').prop('disabled', false);
-                                      $('.linkit4').prop('disabled', false);
-                                      $('.linkit5').prop('disabled', false);
-                                      $('.linkit6').prop('disabled', false);
-                                      $('.linkit7').prop('disabled', true);
+                                      $('.kinonappi').prop('disabled', false);
+                                      $('.tennisnappi').prop('disabled', false);
+                                      $('.maximnappi').prop('disabled', false);
+                                      $('.omenanappi').prop('disabled', true);
+                                      $('.sellonappi').prop('disabled', false);
+                                      $('.flamingonappi').prop('disabled', false);
+                                      $('.itisnappi').prop('disabled', false);
                                     
                                       var url = "http://www.finnkino.fi/xml/Schedule/";
                                       var xmlhttp = new XMLHttpRequest();
