@@ -38,17 +38,35 @@ function etsitennis(){
           var elokuvanimi="<p>"+nimet[i].textContent+"</p>";
           var teatterinimi=teatteri[i].innerHTML;
           var aika = jsonObj.getElementsByTagName("dttmShowStart")[i].childNodes[0].nodeValue;
-        
-
-          var hetki = jsonObj.getElementsByTagName("ShowURL");
-          console.log(hetki);
+          
+          nimet[i];
           var vertaatennis = teatterinimi.localeCompare("Tennispalatsi, Helsinki");
-
+          
+          if (nimet[i].textContent=="Joker"){
+            function addZero(i) {
+              if (i < 10) {
+                i = "0" + i;
+              }
+              return i;
+            }
+            var k = tiedot[i].getElementsByTagName("dttmShowStart")[0].childNodes[0].nodeValue
+            var d = new Date(k);
+            var n = d.getHours();
+            var min = addZero(d.getMinutes());
+            console.log(n+":"+min);
+          }
+           
           
               if(vertaatennis==0){
-                ajat[i]=aika; 
+                var jaaha=[];
+                var hooi=[];
+                jaaha[0] =tiedot[0].getElementsByTagName("Title");
+                hooi[0] = tiedot[1].getElementsByTagName("Title");
 
-               
+                var hetki = tiedot[0].getElementsByTagName("dttmShowStart")[0].childNodes[0].nodeValue
+           
+                ajat[0]=hetki;
+                
                 //kaikki tennispalatsin ajat
                 //lisätään nimen lisäksi posterin kuva listaan
 
