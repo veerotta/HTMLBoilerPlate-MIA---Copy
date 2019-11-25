@@ -7,7 +7,7 @@ var sellonäytökset = [];
 var omenanäytökset = [];
 
 function etsitennis(){
-  //true oikealle functionille ja false muille napeille, etsitennis on linkki1, kino linkki 2 jne. Voi nimetä html paremmin kunhan muuttaa täölläkin
+  
   $('.kinonappi').prop('disabled', false);
   $('.tennisnappi').prop('disabled', true);
   $('.maximnappi').prop('disabled', false);
@@ -26,6 +26,7 @@ function etsitennis(){
 
           var jsonObj  = xmlhttp.responseXML;
           var tiedot = jsonObj.getElementsByTagName("Show");
+         
           var nimet = jsonObj.getElementsByTagName("Title");
           var teatteri = jsonObj.getElementsByTagName("Theatre");
           var ajat=[];
@@ -39,22 +40,29 @@ function etsitennis(){
           var aika = jsonObj.getElementsByTagName("dttmShowStart")[i].childNodes[0].nodeValue;
         
 
-          //tästä vois tehdö kutsuttavan funktionin jokaselle erikseen??
-          //laita listaan vain tennispalatsissa näkyvät näytökset
-
-          //muuta vertaateatterin nimeksi ja "" haku mikä teatteri
+          var hetki = jsonObj.getElementsByTagName("ShowURL");
+          console.log(hetki);
           var vertaatennis = teatterinimi.localeCompare("Tennispalatsi, Helsinki");
 
-              //muista täällä muuttaa myös kaikki
+          
               if(vertaatennis==0){
-                ajat[i]=aika; //kaikki tennispalatsin ajat
+                ajat[i]=aika; 
+
+               
+                //kaikki tennispalatsin ajat
                 //lisätään nimen lisäksi posterin kuva listaan
-              tennisnäytökset[i]="<img src='" + tiedot[i].getElementsByTagName("EventMediumImagePortrait")[0].childNodes[0].nodeValue + "'/>"+elokuvanimi;
+
+                                  var convertedajat = new Date(ajat[i]);
+                                  var month = convertedajat.getHours();
+                                  var day = convertedajat.getMinutes();
+                                  var shortStartDate = month + ":" + day;
+                                  
+
+              tennisnäytökset[i]="<img src='" + tiedot[i].getElementsByTagName("EventMediumImagePortrait")[0].childNodes[0].nodeValue + "'/>"+elokuvanimi+hetki;
           }
 
    }
 
-   //ja tämä
    filteroi(tennisnäytökset);
  
          }
@@ -96,11 +104,12 @@ function etsitennis(){
               
       
                 //tästä vois tehdö kutsuttavan funktionin jokaselle erikseen??
-                //laita listaan vain tennispalatsissa näkyvät näytökset
+              
 
                 var vertaakino = teatterinimi.localeCompare("Kinopalatsi, Helsinki");
          
                 if(vertaakino==0){
+                  
                   kinopalatsi[i]="<img src='" + tiedot[i].getElementsByTagName("EventMediumImagePortrait")[0].childNodes[0].nodeValue + "'/>"+elokuvanimi;
                 }
          }
@@ -159,7 +168,7 @@ function etsitennis(){
                    }
 
                    function etsiMaxim(){
-                    //true oikealle functionille ja false muille napeille, etsitennis on linkki1, kino linkki 2 jne. Voi nimetä html paremmin kunhan muuttaa täölläkin
+                   
                     $('.kinonappi').prop('disabled', false);
                     $('.tennisnappi').prop('disabled', false);
                     $('.maximnappi').prop('disabled', true);
@@ -189,24 +198,33 @@ function etsitennis(){
                             var elokuvanimi="<p>"+nimet[i].textContent+"</p>";
                             var teatterinimi=teatteri[i].innerHTML;
                             var aika = jsonObj.getElementsByTagName("dttmShowStart")[i].childNodes[0].nodeValue;
+                            
                           
                   
                             //tästä vois tehdö kutsuttavan funktionin jokaselle erikseen??
                             //laita listaan vain tennispalatsissa näkyvät näytökset
                   
-                            //muuta vertaateatterin nimeksi ja "" haku mikä teatteri
+                            
                             var vertaamaxim = teatterinimi.localeCompare("Maxim, Helsinki");
                   
-                                //muista täällä muuttaa myös kaikki
+                               
                                 if(vertaamaxim==0){
+
                                   ajat[i]=aika; //kaikki tennispalatsin ajat
                                   //lisätään nimen lisäksi posterin kuva listaan
-                                maximnäytökset[i]="<img src='" + tiedot[i].getElementsByTagName("EventMediumImagePortrait")[0].childNodes[0].nodeValue + "'/>"+elokuvanimi;
+                                
+                                  var convertedajat = new Date(ajat[i]);
+                                  var month = convertedajat.getHours();
+                                  var day = convertedajat.getMinutes();
+                                  var shortStartDate = month + ":" + day;
+                                  console.log(shortStartDate);
+
+                                  maximnäytökset[i]="<img src='" + tiedot[i].getElementsByTagName("EventMediumImagePortrait")[0].childNodes[0].nodeValue + "'/>"+elokuvanimi+shortStartDate;
                             }
                   
                      }
                   
-                     //ja tämä
+                    
                      filteroi(maximnäytökset);
                    
                            }
@@ -214,7 +232,7 @@ function etsitennis(){
                          }
 
                          function etsiFlamingo(){
-                          //true oikealle functionille ja false muille napeille, etsitennis on linkki1, kino linkki 2 jne. Voi nimetä html paremmin kunhan muuttaa täölläkin
+                          
                           $('.kinonappi').prop('disabled', false);
                           $('.tennisnappi').prop('disabled', false);
                           $('.maximnappi').prop('disabled', false);
@@ -249,10 +267,10 @@ function etsitennis(){
                                   //tästä vois tehdö kutsuttavan funktionin jokaselle erikseen??
                                   //laita listaan vain tennispalatsissa näkyvät näytökset
                         
-                                  //muuta vertaateatterin nimeksi ja "" haku mikä teatteri
+                                 
                                   var vertaaFlamingo = teatterinimi.localeCompare("Flamingo, Vantaa");
                         
-                                      //muista täällä muuttaa myös kaikki
+                                     
                                       if(vertaaFlamingo==0){
                                         ajat[i]=aika; //kaikki tennispalatsin ajat
                                         //lisätään nimen lisäksi posterin kuva listaan
@@ -261,7 +279,6 @@ function etsitennis(){
                         
                            }
                         
-                           //ja tämä
                            filteroi(flamingonäytökset);
                          
                                  }
@@ -270,7 +287,6 @@ function etsitennis(){
 
 
                                function etsiSello(){
-                                //true oikealle functionille ja false muille napeille, etsitennis on linkki1, kino linkki 2 jne. Voi nimetä html paremmin kunhan muuttaa täölläkin
                                 $('.kinonappi').prop('disabled', false);
                                 $('.tennisnappi').prop('disabled', false);
                                 $('.maximnappi').prop('disabled', false);
@@ -305,10 +321,8 @@ function etsitennis(){
                                         //tästä vois tehdö kutsuttavan funktionin jokaselle erikseen??
                                         //laita listaan vain tennispalatsissa näkyvät näytökset
                               
-                                        //muuta vertaateatterin nimeksi ja "" haku mikä teatteri
                                         var vertaasello = teatterinimi.localeCompare("Sello, Espoo");
                               
-                                            //muista täällä muuttaa myös kaikki
                                             if(vertaasello==0){
                                               ajat[i]=aika; //kaikki tennispalatsin ajat
                                               //lisätään nimen lisäksi posterin kuva listaan
@@ -317,14 +331,12 @@ function etsitennis(){
                               
                                  }
                               
-                                 //ja tämä
                                  filteroi(sellonäytökset);
                                
                                        }
                                       }
                                      }
                                      function etsiOmena(){
-                                      //true oikealle functionille ja false muille napeille, etsitennis on linkki1, kino linkki 2 jne. Voi nimetä html paremmin kunhan muuttaa täölläkin
                                       $('.kinonappi').prop('disabled', false);
                                       $('.tennisnappi').prop('disabled', false);
                                       $('.maximnappi').prop('disabled', false);
@@ -359,10 +371,8 @@ function etsitennis(){
                                               //tästä vois tehdö kutsuttavan funktionin jokaselle erikseen??
                                               //laita listaan vain tennispalatsissa näkyvät näytökset
                                     
-                                              //muuta vertaateatterin nimeksi ja "" haku mikä teatteri
                                               var vertaaomena = teatterinimi.localeCompare("Omena, Espoo");
                                     
-                                                  //muista täällä muuttaa myös kaikki
                                                   if(vertaaomena==0){
                                                     ajat[i]=aika; //kaikki tennispalatsin ajat
                                                     //lisätään nimen lisäksi posterin kuva listaan
@@ -371,7 +381,6 @@ function etsitennis(){
                                     
                                        }
                                     
-                                       //ja tämä
                                        filteroi(omenanäytökset);
                                      
                                              }
@@ -399,6 +408,7 @@ function etsitennis(){
             //lisää divit h3 tagin sisään sivuston html koodiin
             document.getElementsByTagName('h3')[0].appendChild(temp);
             }
+
   
           //muokkaa posterien+nimen paikkaa sivustolla divin avulla
           for (i = 0; i < arrayLength+2; i++) {
@@ -407,7 +417,3 @@ function etsitennis(){
               }
              }
 
-
-             function disable(){
-              $('.linkit2').prop('disabled', false);
-             }
